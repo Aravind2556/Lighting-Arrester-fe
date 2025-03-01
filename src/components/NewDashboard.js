@@ -99,14 +99,14 @@ export const NewDashboard = () => {
   return (
     <div className="container mx-auto p-6 ">
       <h1 className="text-center text-blue-600 text-2xl font-bold mb-6">
-      Lightning Arrester Monitering
+      Lightning Arrester Monitor  
       </h1>
 
       {/* Charts Section */}
       <div className=" flex-wrap flex justify-center gap-10">
         {/* Combined Chart */}
         <div className="flex justify-center">
-        <div className="bg-gray-100 w-[350px] sm:w-[600px]  shadow-lg rounded-lg p-5">
+        <div className="bg-gray-100  w-[350px] sm:w-[600px]  shadow-lg rounded-lg p-5">
           <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">Combined Chart</h2>
           <LiveChart
             data={[Temperature,Humidity]}
