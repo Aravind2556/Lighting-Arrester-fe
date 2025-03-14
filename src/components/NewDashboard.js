@@ -8,7 +8,7 @@ export const NewDashboard = () => {
   const [Spark, SetSpark] = useState(null);
   const [Current, setCurrent] = useState(null);
   const [Voltage, setVoltage] = useState(null);
-  const [GroundResistance, setGroundResistance] = useState(null);
+
 
   const controls = {
     show: true,
@@ -26,7 +26,9 @@ export const NewDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       const url =
-        "https://api.thingspeak.com/channels/2859542/feeds.json?api_key=VSVACHWZXQGKTAUL";
+        "https://api.thingspeak.com/channels/2877696/feeds.json?api_key=G5EQIV6S4T04N32H";
+
+       
 
       try {
         const res = await fetch(url);
@@ -40,46 +42,41 @@ export const NewDashboard = () => {
             "x-axis": xAxis,
             "y-axis": data.feeds.map((feed) => feed.field1),
             color: "green",
-            seriesName: "Temperature",
+            seriesName: "HUMIDITY",
           });
 
           setHumidity({
             "x-axis": xAxis,
             "y-axis": data.feeds.map((feed) => feed.field2),
             color: "blue",
-            seriesName: "Humidity",
+            seriesName: "TEMPERATURE",
           });
 
           setLightingvalue({
             "x-axis": xAxis,
             "y-axis": data.feeds.map((feed) => feed.field3),
             color: "#ff4f4f",
-            seriesName: "Lighting value",
+            seriesName: "GAS",
           });
           SetSpark({
             "x-axis": xAxis,
             "y-axis": data.feeds.map((feed) => feed.field4),
             color: "#ff4f4f",
-            seriesName: "Spark",
+            seriesName: "CURRENT LIGHT",
           });
           setCurrent({
             "x-axis": xAxis,
             "y-axis": data.feeds.map((feed) => feed.field5),
             color: "#ff4f4f",
-            seriesName: "Current",
+            seriesName: "OBJECT TEMP",
           });
           setVoltage({
             "x-axis": xAxis,
             "y-axis": data.feeds.map((feed) => feed.field6),
             color: "#ff4f4f",
-            seriesName: "Voltage",
+            seriesName: "RESISTANCE",
           });
-          setGroundResistance({
-            "x-axis": xAxis,
-            "y-axis": data.feeds.map((feed) => feed.field7),
-            color: "#ff4f4f",
-            seriesName: "Ground Resistance",
-          });
+
         }
       } catch (error) {
         console.error("Error fetching data from ThingSpeak:", error);
@@ -92,7 +89,7 @@ export const NewDashboard = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  if (!Temperature || !Humidity || !LightingValue || !Spark || !Current || !GroundResistance) {
+  if (!Temperature || !Humidity || !LightingValue || !Spark || !Current ) {
     return <div className="text-center text-lg font-semibold text-gray-600">Loading...</div>;
   }
 
@@ -109,7 +106,7 @@ export const NewDashboard = () => {
         <div className="bg-gray-100  w-[350px] sm:w-[600px]  shadow-lg rounded-lg p-5">
           <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">Combined Chart</h2>
           <LiveChart
-            data={[Temperature,Humidity]}
+            data={[Humidity,Temperature]}
             title="Combined Chart"
             lineStyle="straight"
             lineWidth={1}
@@ -123,7 +120,7 @@ export const NewDashboard = () => {
         {/* LightingValue Chart */}
         <div className="flex justify-center">
         <div className="bg-gray-100 w-[350px] sm:w-[600px] shadow-lg rounded-lg p-5">
-          <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">Lighting Value</h2>
+          <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">GAS</h2>
           <LiveChart
             data={[LightingValue]}
             title={LightingValue.seriesName}
@@ -139,7 +136,7 @@ export const NewDashboard = () => {
         {/* Spark Chart */}
         <div className="flex justify-center">
         <div className="bg-gray-100 w-[350px] sm:w-[600px] shadow-lg rounded-lg p-5">
-          <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">Spark</h2>
+          <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">CURRENT LIGHT</h2>
           <LiveChart
             data={[Spark]}
             title={Spark.seriesName}
@@ -155,7 +152,7 @@ export const NewDashboard = () => {
         {/* Current Chart */}
         <div className="flex justify-center">
         <div className="bg-gray-100 w-[350px] sm:w-[600px] shadow-lg rounded-lg p-5 ">
-          <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">Current</h2>
+          <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">TEMPERATURE</h2>
           <LiveChart
             data={[Current]}
             title={Current.seriesName}
@@ -171,7 +168,7 @@ export const NewDashboard = () => {
                 {/* Voltage Chart */}
                 <div className="flex justify-center">
                 <div className="bg-gray-100 w-[350px] sm:w-[600px]  shadow-lg rounded-lg p-5 ">
-          <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">Voltage</h2>
+          <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">RESISTANCE</h2>
           <LiveChart
             data={[Voltage]}
             title={Voltage.seriesName}
@@ -184,21 +181,7 @@ export const NewDashboard = () => {
         </div>
                 </div>
 
-                        {/* GroundResistance Chart */}
-<div className="flex justify-center ">
-<div className="bg-gray-100 w-[350px] sm:w-[600px] shadow-lg rounded-lg p-5 ">
-          <h2 className="text-center text-lg font-semibold text-gray-800 mb-4">Ground Resistance</h2>
-          <LiveChart
-            data={[GroundResistance]}
-            title={GroundResistance.seriesName}
-            lineStyle="straight"
-            lineWidth={1}
-            chartType="line"
-            controls={controls}
-            
-          />
-        </div>
-</div>
+
       </div>
     </div>
   );
