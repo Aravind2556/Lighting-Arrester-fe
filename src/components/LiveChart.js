@@ -160,7 +160,7 @@ const CustomApexChart = ({ data, title, lineStyle = 'smooth', lineWidth = 2, cha
 
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-3">
+        <div className=" bg-slate-200 rounded-lg shadow-md p-3">
             <ReactApexChart key={chartType} options={options} series={series} height={350} type={chartType} width="100%" />
         </div>
     );

@@ -6,7 +6,13 @@
 
 
 
-
+.login-bg{
+    background: url('../assets/WhatsApp\ Image\ 2025-03-14\ at\ 22.33.21_faddef39.jpg');
+    background-size : cover;
+    background-position: center;
+    width: 100vmin;
+    height: 500px;
+}
 
 
 
