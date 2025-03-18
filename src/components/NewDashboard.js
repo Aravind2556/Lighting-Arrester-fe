@@ -298,7 +298,7 @@ export const NewDashboard = () => {
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-center text-blue-600 text-2xl font-bold mb-6">
-        Lightning Arrester Monitor
+      Lightning arrester monitoring
       </h1>
 
       {/* Last Data Table */}
@@ -351,7 +351,7 @@ export const NewDashboard = () => {
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 gap-6  mt-14">
-        <LiveChart data={[Humidity,Temperature]} title="Combained chart" controls={controls} />
+        <LiveChart data={[Humidity,Temperature]} title="Combine chart" controls={controls} />
         {/* <LiveChart data={[Temperature]} title="Temperature" controls={controls} /> */}
         <LiveChart data={[LightingValue]} title="Gas" controls={controls} />
         <LiveChart data={[Spark]} title="Current Light" controls={controls} />
